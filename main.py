@@ -2,6 +2,7 @@ import pygame
 import sys
 from settings import *
 from level import Level
+from player import Player
 
 class Game:
 
@@ -12,6 +13,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.level = Level()
 
+
     def run(self):
         while True:
             for event in pygame.event.get():
@@ -19,11 +21,13 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.fill(BACKGROUND_COLOR)
+            # self.screen.fill(BACKGROUND_COLOR)
             dt = self.clock.tick() / 1000  # Amount of seconds between each loop
             self.level.run(dt)
             pygame.display.update()
             
+
+
 if __name__ == "__main__":
     game = Game()
     game.run()
