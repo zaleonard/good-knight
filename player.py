@@ -14,6 +14,8 @@ class Player(pygame.sprite.Sprite):
         #sprite image, general setup
         self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
+        self.z = LAYERS['main']
+
 
         #movement attributes
         self.direction = pygame.math.Vector2(0, 0)
@@ -95,8 +97,8 @@ class Player(pygame.sprite.Sprite):
                 self.frame_index = 0  # Reset animation frame index
 
             #change tools
-            if keys[pygame.K_q] and not self.timers['tool switch'].active:
-                self.timers['tool switch'].activate()
+            if keys[pygame.K_q] and not self.timers['tool_switch'].active:
+                self.timers['tool_switch'].activate()
                 self.tool_index += 1
                 if self.tool_index >= len(self.tools):
                     self.tool_index = 0
@@ -143,8 +145,8 @@ class Player(pygame.sprite.Sprite):
             # Check for collision with screen boundaries
             if self.pos.x < 0:
                 self.pos.x = 0
-            elif self.pos.x > SCREEN_WIDTH - self.rect.width:
-                self.pos.x = SCREEN_WIDTH - self.rect.width
+            # elif self.pos.x > SCREEN_WIDTH - self.rect.width:
+            #     self.pos.x = SCREEN_WIDTH - self.rect.width
         
         #vertical movement
         if self.direction.y != 0:
@@ -152,8 +154,8 @@ class Player(pygame.sprite.Sprite):
             # Check for collision with screen boundaries
             if self.pos.y < 0:
                 self.pos.y = 0
-            elif self.pos.y > SCREEN_HEIGHT - self.rect.height:
-                self.pos.y = SCREEN_HEIGHT - self.rect.height
+            # elif self.pos.y > SCREEN_HEIGHT - self.rect.height:
+            #     self.pos.y = SCREEN_HEIGHT - self.rect.height
 
         #position and speed (collision)
         self.pos += self.direction * self.speed * dt
